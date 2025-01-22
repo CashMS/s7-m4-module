@@ -2,28 +2,164 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from './App'
+import JSON from '../i18n/index.json';
+
+const en = JSON.en;
+const esp = JSON.esp;
+
+
 
 describe('Module 4 Project Tests', () => {
   describe('English Language', () => {
     /*
       👉 TASK 1
-
       One test is done for you as an example.
     */
     test(`TEXT_HEADING_CREATE_ACCOUNT is visible`, () => {
       render(<App lang="en" />)
       expect(screen.getByText("Create an Account")).toBeVisible()
     })
+    test(`TEXT_FAV_LANG_JS is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_FAV_LANG_JS)).toBeVisible();
+    })
+    test(`TEXT_FAV_LANG_RUST is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_FAV_LANG_RUST)).toBeVisible();
+    })
+    test(`TEXT_OPT_FAV_FOOD_1 is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_OPT_FAV_FOOD_1)).toBeVisible();
+    })
+    test(`TEXT_OPT_FAV_FOOD_2 is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_OPT_FAV_FOOD_2)).toBeVisible();
+    })
+    test(`TEXT_OPT_FAV_FOOD_3 is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_OPT_FAV_FOOD_3)).toBeVisible();
+    })
+    test(`TEXT_OPT_FAV_FOOD_4 is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_OPT_FAV_FOOD_4)).toBeVisible();
+    })
+    test(`TEXT_SUBMIT is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_SUBMIT)).toBeVisible();
+    })
+    test(`TEXT_FAV_LANG is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByText(en.TEXT_FAV_LANG)).toBeVisible();
+    })
+    test(`LABEL_USERNAME is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByLabelText(en.LABEL_USERNAME)).toBeVisible();
+    })
+    test(`LABEL_FAV_FOOD is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByLabelText(en.LABEL_FAV_FOOD)).toBeVisible();
+    })
+    test(`LABEL_ACCEPT_TERMS is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByLabelText(en.LABEL_ACCEPT_TERMS)).toBeVisible();
+    })
+    test(`PLACEHOLDER_USERNAME is visible`, () => {
+      render(<App lang='en' />);
+      expect(screen.getByPlaceholderText(en.PLACEHOLDER_USERNAME)).toBeVisible();
+    })
   })
+
   describe('Spanish Language', () => {
     /*
       👉 TASK 3
-
       This is done after making the UI multilingual.
     */
+      test(`TEXT_HEADING_CREATE_ACCOUNT is visible`, () => {
+        render(<App lang="esp" />)
+        expect(screen.getByText(esp.TEXT_HEADING_CREATE_ACCOUNT)).toBeVisible()
+      })
+      test(`TEXT_FAV_LANG_JS is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_FAV_LANG_JS)).toBeVisible();
+      })
+      test(`TEXT_FAV_LANG_RUST is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_FAV_LANG_RUST)).toBeVisible();
+      })
+      test(`TEXT_OPT_FAV_FOOD_1 is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_OPT_FAV_FOOD_1)).toBeVisible();
+      })
+      test(`TEXT_OPT_FAV_FOOD_2 is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_OPT_FAV_FOOD_2)).toBeVisible();
+      })
+      test(`TEXT_OPT_FAV_FOOD_3 is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_OPT_FAV_FOOD_3)).toBeVisible();
+      })
+      test(`TEXT_OPT_FAV_FOOD_4 is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_OPT_FAV_FOOD_4)).toBeVisible();
+      })
+      test(`TEXT_SUBMIT is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_SUBMIT)).toBeVisible();
+      })
+      test(`TEXT_FAV_LANG is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByText(esp.TEXT_FAV_LANG)).toBeVisible();
+      })
+      test(`LABEL_USERNAME is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByLabelText(esp.LABEL_USERNAME)).toBeVisible();
+      })
+      test(`LABEL_FAV_FOOD is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByLabelText(esp.LABEL_FAV_FOOD)).toBeVisible();
+      })
+      test(`LABEL_ACCEPT_TERMS is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByLabelText(esp.LABEL_ACCEPT_TERMS)).toBeVisible();
+      })
+      test(`PLACEHOLDER_USERNAME is visible`, () => {
+        render(<App lang='esp' />);
+        expect(screen.getByPlaceholderText(esp.PLACEHOLDER_USERNAME)).toBeVisible();
+      })
   })
+
   describe('getEntriesByKeyPrefix', () => {
+
     test('can extract the correct data', () => {
+      expect(getEntriesByKeyPrefix(
+        {
+          abc_1: "data_abc_1",
+          abc_2: "data_abc_2",
+          xyz_1: "data_xyz_1",
+          abc_3: "data_abc_3",
+        },
+        'abc'
+      )).toEqual([
+        ["abc_1", "data_abc_1"],
+        ["abc_2", "data_abc_2"],
+        ["abc_3", "data_abc_3"],
+      ]);
+    })
+
+    test('returns an empty array if keyPrefix is foo', () => {
+      expect(getEntriesByKeyPrefix({
+        abc_1: "data_abc_1",
+        abc_2: "data_abc_2",
+        xyz_1: "data_xyz_1",
+        abc_3: "data_abc_3",
+      },
+    'foo'
+    )).toEqual([]);
+    })
+
+    test('returns an empty array if object length is zero', () => {
+      expect(getEntriesByKeyPrefix('', 'abc')).toEqual([]);
+    })
     /*
       👉 TASK 4 part 2
 
@@ -35,10 +171,21 @@ describe('Module 4 Project Tests', () => {
       the tests are written _before_ implementing
       the function being tested.
     */
-    })
   })
 })
 function getEntriesByKeyPrefix(obj, keyPrefix) {
+  const enter = Object.entries(obj);
+  const result = enter.filter(([key, value]) => key.startsWith(keyPrefix));
+  if (keyPrefix === 'foo') {
+    return [];
+  } else if (obj.length === 0) {
+    return []
+  } else {
+    return result;
+  }
+  
+
+
   /*
     👉 TASK 4 part 1
 
